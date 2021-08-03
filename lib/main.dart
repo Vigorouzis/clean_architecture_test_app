@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:story_view/controller/story_controller.dart';
 import 'package:story_view/widgets/story_view.dart';
 
@@ -93,14 +94,20 @@ class _StoryScreenState extends State<StoryScreen> {
                   onPressed: () => print('hello'),
                   child: Text(
                     'войти',
-                    style: TextStyle(fontFamily: 'Noah',fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+                    style: TextStyle(
+                        fontFamily: 'Noah',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                        color: Colors.black),
                   ),
                 ),
                 Spacer(),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                )
+                SvgPicture.asset(
+                  'assets/forward_arrow.svg',
+                  width: 43,
+                  height: 15,
+                  fit: BoxFit.none,
+                ),
               ],
             ),
           ),
