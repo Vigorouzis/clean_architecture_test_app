@@ -50,17 +50,6 @@ class StoryScreen extends StatefulWidget {
 class _StoryScreenState extends State<StoryScreen> {
   StoryController? _storyController;
 
-  List<StoryItem?> _storyItems = [
-    StoryItem.pageProviderImage(AssetImage('assets/start_video/11a.gif'),
-        imageFit: BoxFit.cover),
-    StoryItem.pageProviderImage(AssetImage('assets/start_video/22a.gif'),
-        imageFit: BoxFit.cover),
-    StoryItem.pageProviderImage(AssetImage('assets/start_video/33a.gif'),
-        imageFit: BoxFit.cover),
-    StoryItem.pageProviderImage(AssetImage('assets/start_video/44a.gif'),
-        imageFit: BoxFit.cover)
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -75,44 +64,152 @@ class _StoryScreenState extends State<StoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          child: StoryView(
-            //  onComplete: () => Navigator.of(context).pop(),
-            controller: _storyController!,
-            storyItems: _storyItems,
-          ),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 39, left: 16, right: 16),
-            child: Row(
-              children: [
-                TextButton(
-                  onPressed: () => print('hello'),
-                  child: Text(
-                    'войти',
-                    style: TextStyle(
-                        fontFamily: 'Noah',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        color: Colors.black),
-                  ),
-                ),
-                Spacer(),
-                SvgPicture.asset(
-                  'assets/forward_arrow.svg',
-                  width: 43,
-                  height: 15,
-                  fit: BoxFit.none,
-                ),
-              ],
+    List<StoryItem?> _storyItems = [
+      StoryItem(
+        Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: Image(
+                image: AssetImage('assets/start_video/11a.gif'),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 48, left: 16),
+              child: Text(
+                'Выбираем цели и строим план как их достичь',
+                style: TextStyle(
+                    fontFamily: 'Noah',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36,
+                    color: Colors.black),
+              ),
+            ),
+          ],
         ),
-      ],
+        duration: Duration(seconds: 15),
+      ), StoryItem(
+        Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: Image(
+                image: AssetImage('assets/start_video/22a.gif'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 48, left: 16),
+              child: Text(
+                'Создаём привычку идти к цели',
+                style: TextStyle(
+                    fontFamily: 'Noah',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36,
+                    color: Colors.black),
+              ),
+            ),
+          ],
+        ),
+        duration: Duration(seconds: 15),
+      ), StoryItem(
+        Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: Image(
+                image: AssetImage('assets/start_video/33a.gif'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 48, left: 16),
+              child: Text(
+                'Достигаем доходности',
+                style: TextStyle(
+                    fontFamily: 'Noah',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36,
+                    color: Colors.black),
+              ),
+            ),
+          ],
+        ),
+        duration: Duration(seconds: 15),
+      ),
+      StoryItem(
+        Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: Image(
+                image: AssetImage('assets/start_video/44a.gif'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 48, left: 16),
+              child: Text(
+                'Так формируется ваш капитал',
+                style: TextStyle(
+                    fontFamily: 'Noah',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 36,
+                    color: Colors.black),
+              ),
+            ),
+          ],
+        ),
+        duration: Duration(seconds: 15),
+      ),
+    ];
+    return SafeArea(
+      child: Material(
+        child: Stack(
+          children: [
+            Container(
+              child: StoryView(
+                //  onComplete: () => Navigator.of(context).pop(),
+                controller: _storyController!,
+                storyItems: _storyItems,
+                onStoryShow: (value) => print(value.hashCode),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 36, left: 16, right: 16),
+                child: Row(
+                  children: [
+                    TextButton(
+                      onPressed: () => print('hello'),
+                      child: Text(
+                        'войти',
+                        style: TextStyle(
+                            fontFamily: 'Noah',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: Colors.black),
+                      ),
+                    ),
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () => _storyController!.next(),
+                      child: SvgPicture.asset(
+                        'assets/forward_arrow.svg',
+                        width: 43,
+                        height: 15,
+                        fit: BoxFit.none,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
